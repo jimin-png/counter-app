@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/jimin/Downloads/BLOCKCHAIN/counter-app/contracts/Counter.sol": {
+      "lastModificationDate": 1761610231648,
+      "contentHash": "4650c77d73f22a9ce59f07b933d5f306",
+      "sourceName": "contracts/Counter.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.19"
+      ],
+      "artifacts": [
+        "Counter"
+      ]
+    }
+  }
+}
