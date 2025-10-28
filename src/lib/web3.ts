@@ -1,4 +1,5 @@
-import { Contract, BrowserProvider, Signer } from 'ethers';
+import { Contract, Signer, ethers } from 'ethers';
+
 // JSON 파일을 소문자 변수명 'counterAbi'로 가져옵니다.
 import counterAbi from './counter.json'
 
@@ -16,7 +17,7 @@ if (!CONTRACT_ADDRESS) {
 }
 
 // ABI 인터페이스는 상수임을 강조하기 위해 대문자로 유지합니다.
-export const COUNTER_ABI_INTERFACE = counterAbi; 
+export const COUNTER_ABI_INTERFACE = counterAbi;
 
 // ----------------------
 // 2. 타입 정의 및 Ethers.js 인스턴스 생성 함수
@@ -28,9 +29,9 @@ export const COUNTER_ABI_INTERFACE = counterAbi;
  * 브라우저 환경에서 Ethers.js의 Provider 객체를 반환합니다.
  * @returns {BrowserProvider | null}
  */
-export const getProvider = (): BrowserProvider | null => {
+export const getProvider = (): ethers.providers.Web3Provider | null => {
   if (typeof window !== 'undefined' && window.ethereum) {
-    return new BrowserProvider(window.ethereum);
+    return new ethers.providers.Web3Provider(window.ethereum);
   }
   return null;
 };
@@ -40,7 +41,7 @@ export const getProvider = (): BrowserProvider | null => {
  * @param signerOrProvider - Contract 객체에 연결할 Signer 또는 Provider
  * @returns {Contract}
  */
-export const getCounterContract = (signerOrProvider: Signer | BrowserProvider): Contract => {
+export const getCounterContract = (signerOrProvider: Signer | ethers.providers.Web3Provider): Contract => {
   // 환경변수의 주소와 JSON 파일에서 가져온 ABI를 사용하여 Contract 인스턴스를 생성합니다.
   return new Contract(CONTRACT_ADDRESS, COUNTER_ABI_INTERFACE, signerOrProvider);
 };
@@ -54,10 +55,10 @@ export const connectWallet = async (): Promise<Signer | null> => {
     if (!provider) {
         throw new Error("MetaMask 또는 Web3 지갑이 감지되지 않았습니다.");
     }
-    
+
     // 지갑 연결 요청
     await provider.send("eth_requestAccounts", []);
-    
+
     // 서명자 (Signer) 객체 반환
     const signer = await provider.getSigner();
     return signer;
